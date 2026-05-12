@@ -97,13 +97,13 @@ def run_event_loop():
     clock_speed = 5
     timeout = int(max(10, 1000 / clock_speed))
     
-    next_address = 0
+    next_address = 0x0
     next_inst = None
-    reg_a = 0
-    reg_b = 0
-    accum = 0
-    status_reg = [0, 0, 0, 0, 0, 0]
-    memory = [0] * 1024
+    reg_a = 0x0
+    reg_b = 0x0
+    accum = 0x0
+    status_reg = [0x0, 0x0, 0x0, 0x0, 0x0, 0x0]
+    memory = [0x0] * 1024
     
     parsed = False
 
@@ -173,11 +173,11 @@ def run_event_loop():
             clock_running = False
             clock_phase = False
             cycle_count = 0
-            next_address = 0
-            reg_a = 0
-            reg_b = 0
-            accum = 0
-            status_reg = [0, 0, 0, 0, 0]
+            next_address = 0x0
+            reg_a = 0x0
+            reg_b = 0x0
+            accum = 0x0
+            status_reg = [0x0, 0x0, 0x0, 0x0, 0x0, 0x0]
             parsed = False
             resolved_program = None
             

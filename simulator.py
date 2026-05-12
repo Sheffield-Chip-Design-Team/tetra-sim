@@ -107,13 +107,13 @@ def single_cycle_execution(window, current_instruction, reg_a, reg_b, accum, sta
         case "NOP":
             pass  # No operation
         case "HALT":
-            next_address = current_address  # HALT should not advance the program counter\
+            next_address = int(current_address, 16)  # HALT should not advance the program counter
             pass  # Simulation will stop after this instruction, so no state changes needed
         case "ADD":
             accum = (reg_a + reg_b) & 0xF
             status_reg[0] = 1 if (reg_a & 0x8) == (reg_b & 0x8) and (accum & 0x8) != (reg_a & 0x8) else 0  # Carry flag
             status_reg[4] = 1 if accum == 0 else 0  # Zero flag
-            status_reg[5] = 1 if accum & 0x8 else 0  # Sign flag
+            status_reg[5] = 1 if (accum & 0x8) else 0  # Sign flag ERROR HERE
             pass
         case "ADDI":
             accum = (reg_a + int(operand)) & 0xF
@@ -240,9 +240,9 @@ def single_cycle_execution(window, current_instruction, reg_a, reg_b, accum, sta
             next_address = int(operand, 16)  # Absolute jump
             pass
         case "BRZ":
-            if status_reg[4] == 0:
+            if status_reg[4] == 1:
                 next_address = int(operand, 16)
-                pass
+            pass
         case "BRN":
             if status_reg[5] == 1:  # Check if negative (sign bit set)
                 next_address = int(operand, 16)
